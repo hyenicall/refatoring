@@ -1,16 +1,16 @@
 export default class Book {
-  #reservations;
+  #reservations
   constructor() {
-    this.#reservations = [];
+    this.#reservations = []
   }
 
-  addReservation(customer) {
-    this.#reservations.push(customer);
+  addReservation(customer, isPriority) {
+    this.#reservations.push(customer)
   }
 
   hasReservation(customer) {
     return this.#reservations.some(
       (reservedCustomer) => reservedCustomer.id === customer.id
-    );
+    )
   }
 }
