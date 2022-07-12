@@ -1,10 +1,8 @@
 export function priceOrder(product, quantity, shippingMethod) {
-  const price =
-    basePrice(product, quantity) -
-    discount(product, quantity) +
-    shippingCost(product, quantity, shippingMethod)
-
-  return price
+  const basePrice = calculateBasePrice(product, quantity)
+  const discount = calculateDiscount(product, quantity)
+  const shippingCost = calculateShippingCost(product, quantity, shippingMethod)
+  return basePrice - discount + shippingCost
 }
 
 const product = {
@@ -19,10 +17,10 @@ const shippingMethod = {
   discountedFee: 3,
 }
 
-function basePrice(product, quantity) {
+function calculateBasePrice(product, quantity) {
   return product.basePrice * quantity
 }
-function discount(product, quantity) {
+function calculateDiscount(product, quantity) {
   return (
     Math.max(quantity - product.discountThreshold, 0) *
     product.basePrice *
@@ -30,11 +28,12 @@ function discount(product, quantity) {
   )
 }
 function shippingPerCase(product, quantity, shippingMethod) {
-  return basePrice(product, quantity) > shippingMethod.discountThreshold
+  return calculateBasePrice(product, quantity) >
+    shippingMethod.discountThreshold
     ? shippingMethod.discountedFee
     : shippingMethod.feePerCase
 }
-function shippingCost(product, quantity, shippingMethod) {
+function calculateShippingCost(product, quantity, shippingMethod) {
   return quantity * shippingPerCase(product, quantity, shippingMethod)
 }
 
