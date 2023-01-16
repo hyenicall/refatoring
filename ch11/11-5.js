@@ -1,23 +1,27 @@
 export class Order {
   constructor(quantity, itemPrice) {
-    this.quantity = quantity;
-    this.itemPrice = itemPrice;
+    this.quantity = quantity
+    this.itemPrice = itemPrice
   }
 
   get finalPrice() {
-    const basePrice = this.quantity * this.itemPrice;
-    let discountLevel;
-    if (this.quantity > 100) discountLevel = 2;
-    else discountLevel = 1;
-    return this.discountedPrice(basePrice, discountLevel);
+    return this.discountedPrice()
   }
 
-  discountedPrice(basePrice, discountLevel) {
-    switch (discountLevel) {
+  get discountLenel() {
+    return this.quantity > 100 ? 2 : 1
+  }
+
+  get basePrice() {
+    return this.quantity * this.itemPrice
+  }
+
+  discountedPrice() {
+    switch (this.discountLevel) {
       case 1:
-        return basePrice * 0.95;
+        return this.basePrice * 0.95
       case 2:
-        return basePrice * 0.9;
+        return this.basePrice * 0.9
     }
   }
 }
