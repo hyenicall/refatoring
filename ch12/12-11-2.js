@@ -1,36 +1,28 @@
-class CatalogItem {
-  constructor(id, title, tags) {
-    this._id = id;
-    this._title = title;
-    this._tags = tags;
+class Scroll {
+  constructor(id, dataLastCleaned, CatalogItem) {
+    this._id = id
+    this._lastCleaned = dataLastCleaned
   }
 
   get id() {
-    return this._id;
+    return this._id
   }
 
   get title() {
-    return this._title;
+    return this._title
   }
 
   hasTag(arg) {
-    return this._tags.includes(arg);
-  }
-}
-
-class Scroll extends CatalogItem {
-  constructor(id, title, tags, dataLastCleaned) {
-    super(id, title, tags);
-    this._lastCleaned = dataLastCleaned;
+    return this._tags.includes(arg)
   }
 
   needsCleaning(targetDate) {
-    const threshold = this.hasTag('revered') ? 700 : 1500;
+    const threshold = this.hasTag('revered') ? 700 : 1500
 
-    return this.daysSinceLastCleaning(targetDate) > threshold;
+    return this.daysSinceLastCleaning(targetDate) > threshold
   }
 
   daysSinceLastCleaning(targetDate) {
-    return this._lastCleaned.until(targetDate, ChronoUnit.DAYS);
+    return this._lastCleaned.until(targetDate, ChronoUnit.DAYS)
   }
 }
