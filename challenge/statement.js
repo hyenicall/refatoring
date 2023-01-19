@@ -2,14 +2,14 @@
 // 2. 데이터 가공
 // 3. 데이터 출력
 
-import { createStatement } from './create_statement'
+import { Statement } from './create_statement'
 
 export function statement(invoice, plays) {
-  return renderPlainText(createStatement(invoice, plays))
+  return renderPlainText(new Statement(invoice, plays))
 }
 
 export function htmlStatement(invoice, plays) {
-  return renderHTML(createStatement(invoice, plays))
+  return renderHTML(new Statement(invoice, plays))
 }
 
 function renderHTML(statement) {
